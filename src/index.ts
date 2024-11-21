@@ -43,7 +43,7 @@ async function run(): Promise<void> {
 
     } else if (action === 'closed') {
       const records = await cf.dns.records.list({ zone_id: zoneId });
-      const record = records.result.find(r => r.name === subdomain);
+      const record = records.result.find(r => r.name === fullDomain);
       
       if (record && record.id) {
         await cf.dns.records.delete(record.id, { zone_id: zoneId });

@@ -43056,7 +43056,7 @@ function run() {
             }
             else if (action === 'closed') {
                 const records = yield cf.dns.records.list({ zone_id: zoneId });
-                const record = records.result.find(r => r.name === subdomain);
+                const record = records.result.find(r => r.name === fullDomain);
                 if (record && record.id) {
                     yield cf.dns.records.delete(record.id, { zone_id: zoneId });
                     core.info(`Deleted DNS record for ${fullDomain}`);
