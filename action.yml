@@ -1,0 +1,22 @@
+name: "Olyn Github DNS Action"
+description: "Helper action to resolve DNS records"
+inputs:
+  cloudflare-token:
+    description: "The Cloudflare API token"
+    required: true
+  zone-id:
+    description: "The Cloudflare zone ID"
+    required: true
+  base-domain:
+    description: "The base domain for the DNS records"
+    required: true
+  dns-content:
+    description: "The DNS content for the DNS records (AWS NLB)"
+    required: true
+outputs:
+  domain:
+    description: "The domain for the DNS records"
+
+runs:
+  using: "node20"
+  main: "dist/index.js"
