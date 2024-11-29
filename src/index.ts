@@ -22,9 +22,9 @@ async function run(): Promise<void> {
       throw new Error('No PR number found in context');
     }
 
-    const sanitizedBranch = branchName
+   const sanitizedBranch = branchName
       .toLowerCase()
-      .replace(/[^a-z0-9-]/g, '-');
+      .replace(/[^a-z0-9-/]/g, '-'); 
 
     const subdomain = `pr-${prNumber}-${sanitizedBranch}`;
     const fullDomain = `${subdomain}.${baseDomain}`;
@@ -33,7 +33,7 @@ async function run(): Promise<void> {
     core.info(`Processing PR #${prNumber} for ${fullDomain}`);
 
     if (action === 'opened' || action === 'reopened' || action === 'ready_for_review' || action === 'converted_to_draft') {
-      await cf.dns.records.create( {
+      await cf.dns.records.create({
         zone_id: zoneId,
         type: 'CNAME',
         name: subdomain,
