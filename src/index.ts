@@ -29,7 +29,7 @@ async function run(): Promise<void> {
     const subdomain = `pr-${prNumber}-${sanitizedBranch}`;
     const fullDomain = `${subdomain}.${baseDomain}`;
 
-    if (action === 'opened' || action === 'reopened') {
+    if (action === 'opened' || action === 'reopened' || action === 'ready_for_review' || action === 'converted_to_draft') {
       await cf.dns.records.create( {
         zone_id: zoneId,
         type: 'CNAME',
