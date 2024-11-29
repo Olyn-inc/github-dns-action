@@ -17,9 +17,16 @@ async function run(): Promise<void> {
     const prNumber = payload.pull_request?.number;
     const action = payload.action;
     const branchName = payload.pull_request?.head.ref || '';
+
+    core.info(`Action: ${action}`);
+    core.info(`branchName: ${branchName}`)
     
     if (!prNumber) {
       throw new Error('No PR number found in context');
+    }
+
+    if (!branchName) {
+      throw new Error('No branchName found in context');
     }
 
    const sanitizedBranch = branchName
@@ -29,7 +36,6 @@ async function run(): Promise<void> {
     const subdomain = `pr-${prNumber}-${sanitizedBranch}`;
     const fullDomain = `${subdomain}.${baseDomain}`;
 
-    core.info(`Action: ${action}`);
     core.info(`Processing PR #${prNumber} for ${fullDomain}`);
 
     if (action === 'opened' || action === 'reopened' || action === 'ready_for_review' || action === 'converted_to_draft') {
