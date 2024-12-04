@@ -27,7 +27,7 @@ async function run(): Promise<void> {
       .toLowerCase()
       .replace(/[^a-z0-9-]/g, '-');
 
-    const subdomain = `pr-${prNumber}-${sanitizedBranch}`;
+    const subdomain = `pr-${prNumber}-${sanitizedBranch}.${appName}`;
     const fullDomain = `${subdomain}.${appName}.${baseDomain}`;
 
     if (action === 'opened' || action === 'reopened' || action === 'labeled') {
