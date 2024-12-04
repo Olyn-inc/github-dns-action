@@ -4,6 +4,7 @@ import Cloudflare from 'cloudflare';
 
 async function run(): Promise<void> {
   try {
+    const appName = core.getInput('app-name', { required: true });
     const cloudflareToken = core.getInput('cloudflare-token', { required: true });
     const zoneId = core.getInput('zone-id', { required: true });
     const baseDomain = core.getInput('base-domain', { required: true });
@@ -27,7 +28,7 @@ async function run(): Promise<void> {
       .replace(/[^a-z0-9-/]/g, '-');
 
     const subdomain = `pr-${prNumber}-${sanitizedBranch}`;
-    const fullDomain = `${subdomain}.${baseDomain}`;
+    const fullDomain = `${subdomain}.${appName}.${baseDomain}`;
 
     if (action === 'opened' || action === 'reopened' || action === 'labeled') {
       await cf.dns.records.create( {
