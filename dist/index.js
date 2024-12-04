@@ -43024,6 +43024,7 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         var _a, _b;
         try {
+            const appName = core.getInput('app-name', { required: true });
             const cloudflareToken = core.getInput('cloudflare-token', { required: true });
             const zoneId = core.getInput('zone-id', { required: true });
             const baseDomain = core.getInput('base-domain', { required: true });
@@ -43040,10 +43041,10 @@ function run() {
             }
             const sanitizedBranch = branchName
                 .toLowerCase()
-                .replace(/[^a-z0-9-]/g, '-');
+                .replace(/[^a-z0-9-/]/g, '-');
             const subdomain = `pr-${prNumber}-${sanitizedBranch}`;
-            const fullDomain = `${subdomain}.${baseDomain}`;
-            if (action === 'opened' || action === 'reopened') {
+            const fullDomain = `${subdomain}.${appName}.${baseDomain}`;
+            if (action === 'opened' || action === 'reopened' || action === 'labeled') {
                 yield cf.dns.records.create({
                     zone_id: zoneId,
                     type: 'CNAME',
