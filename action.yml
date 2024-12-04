@@ -1,6 +1,9 @@
 name: "Olyn Github DNS Action"
 description: "Helper action to resolve DNS records"
 inputs:
+  app-name:
+    description: "The name of the app"
+    required: true
   cloudflare-token:
     description: "The Cloudflare API token"
     required: true

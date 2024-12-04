@@ -25,7 +25,7 @@ async function run(): Promise<void> {
 
     const sanitizedBranch = branchName
       .toLowerCase()
-      .replace(/[^a-z0-9-/]/g, '-');
+      .replace(/[^a-z0-9-]/g, '-');
 
     const subdomain = `pr-${prNumber}-${sanitizedBranch}`;
     const fullDomain = `${subdomain}.${appName}.${baseDomain}`;
