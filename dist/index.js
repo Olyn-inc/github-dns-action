@@ -43043,7 +43043,7 @@ function run() {
                 .toLowerCase()
                 .replace(/[^a-z0-9-]/g, '-');
             const subdomain = `pr-${prNumber}-${sanitizedBranch}.${appName}`;
-            const fullDomain = `${subdomain}.${appName}.${baseDomain}`;
+            const fullDomain = `${subdomain}.${baseDomain}`;
             if (action === 'opened' || action === 'reopened' || action === 'labeled') {
                 yield cf.dns.records.create({
                     zone_id: zoneId,
